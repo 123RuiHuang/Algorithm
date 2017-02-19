@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type = "text/javascript">
+window.onload = function() {
+if(navigator.language) {
+ language = navigator.language;
+}
+else {
+ language = navigator.browserlanguage;
+}
+document.getElementsByTagName("p")[0].innerHTML = language;
+}
+</script>
+</head>
+<body>
+<h>system language is </h>
+<p id = "ni"></p>
+</body>
+</html>
