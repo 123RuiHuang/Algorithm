@@ -1,0 +1,29 @@
+public class Solution {
+ List<Integer> list = new ArrayList<Integer>();
+	Stack<TreeNode> stack = new Stack<TreeNode>();
+
+	public List<Integer> inorderTraversal(TreeNode root) {
+		TreeNode cur = root;
+		if (root == null)
+			return list;
+		while (cur != null || !stack.isEmpty()) {
+			if (cur.left != null) {
+				stack.add(cur);
+				cur = cur.left;
+			} else {
+				list.add(cur.val);
+				cur = cur.right;
+				while (cur == null && !stack.isEmpty()) {
+					cur = stack.pop();
+					list.add(cur.val);
+					cur = cur.right;
+				}
+
+			}
+		}
+		return list;
+	}
+
+}
+
+http://blog.csdn.net/pi9nc/article/details/13008511
