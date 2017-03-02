@@ -1,0 +1,36 @@
+// leetcode 515 using BFS to find the largest value of each row of a binary tree( a tree that each node have at most two children)
+
+public class Solution {
+	public List<Integer> largestValues(TreeNode root) {
+		List<Integer> list = new ArrayList<Integer>();
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		if(root != null) queue.add(root);
+		while(queue.size() != 0) {
+			int size = queue.size();
+			int max = Integer.MIN_VALUE;
+			for(int i = 0; i < size; i++) {
+              TreeNode node = queue.poll();
+              max = Math.max(max,node.val);
+              if(node.left != null) queue.add(node.left);
+              if(node.right != null) queue.add(node.right);
+		}
+			list.add(max);
+	}
+		return list;
+
+}
+	
+	public static void main(String[] args) {
+	TreeNode a = new TreeNode(1);
+	TreeNode b = new TreeNode(2);
+	TreeNode c = new TreeNode(3);
+	a.left = b;
+	a.right =c;
+	Solution test = new Solution();
+	List<Integer> list = test.largestValues(a);
+	for(int i = 0; i < list.size(); i++) {
+		System.out.println(list.get(i));
+	}
+	}
+}
+// time complexity O(n).
