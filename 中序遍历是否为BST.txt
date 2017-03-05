@@ -1,0 +1,31 @@
+判断是否为BST 用中序遍历
+if(root == null) return true;
+List<Integer> list = new ArrayList<Integer>();
+		
+Stack<TreeNode> stack = new Stack<TreeNode>();
+
+		
+while(root != null || !stack.isEmpty()) {
+	while(root.left != null) {
+	stack.add(root);
+	root = root.left;
+	}
+  list.add(root.val);
+root = root.right;
+while(root == null && !stack.isEmpty()) {
+	TreeNode cur = stack.pop();
+	list.add(cur.val);
+	root = cur.right;
+	}
+	
+			
+}
+for(int i = 0; i < list.size() - 1; i++) {
+if(list.get(i) >= list.get(i+1))
+return false;
+}
+
+return true;
+
+http://blog.csdn.net/pi9nc/article/details/13008511\
+注意这个链接里面的用非递归写的中序遍历 有错误 if(root.left != null) 应该改为 while(root.left != null)
