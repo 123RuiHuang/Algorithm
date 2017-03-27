@@ -1,0 +1,6 @@
+http://blog.csdn.net/sunao2002002/article/details/46318025
+
+leetcode 137 Single Number II
+这个方法对 Single Number I II 都实用 不过 Single Number I 有一个更加好的解法就是直接全部亦或。
+
+这个答案的代码理解关键  result操作其实相当于加法，没发现一个一就加上去（带权值）
