@@ -1,0 +1,32 @@
+// iterative Time O(n); Space O(n)
+public List<Integer> postorderTraversal(TreeNode root) {
+      
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        TreeNode curNode = root;
+        Deque<TreeNode> stack = new ArrayDeque<TreeNode>();
+        while(curNode != null || !stack.isEmpty()) {
+            if(curNode != null) {
+                stack.push(curNode);
+                list.addFirst(curNode.val);
+                curNode = curNode.right;
+            }
+            
+            else {
+                curNode = stack.pop();
+                curNode = curNode.left;
+                
+            }
+            
+            
+        }
+        return list;
+    }
+    
+// recursive  Time O(n); Space O(n)
+public void postorderTraversalHelper(List<Integer> list, TreeNode root) {
+        if(root == null) return;
+        postorderTraversalHelper(list,root.left);
+        postorderTraversalHelper(list,root.right);
+        list.add(root.val);
+        
+    }
