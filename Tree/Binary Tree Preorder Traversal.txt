@@ -1,0 +1,40 @@
+ // Iterative  Time O(n); Space O(n)
+  public List<Integer> preorderTraversalStack(TreeNode root) {
+    	List<Integer> list = new ArrayList<Integer>();
+    	Stack<TreeNode> stack = new Stack<TreeNode>();
+    	TreeNode curNode = root;
+    	while(curNode != null || !stack.isEmpty()) {
+    		while(curNode != null) {
+    			list.add(curNode.val);
+    			stack.add(curNode);
+    			curNode = curNode.left;
+    		}
+    		if(!stack.isEmpty()) {
+    			curNode = stack.pop();
+    			curNode = curNode.right;
+    		}
+    	}
+    	return list;	
+    }
+    
+ //Recursive Time O(n); Space O(n)
+ public List<Integer> preorderTraversalRecursice(TreeNode root) {
+    	List<Integer> list = new ArrayList<Integer>();
+    	preorderTraversalRecursiceHelper(list,root);
+    	for(int i = 0; i < list.size(); i++) {
+        	System.out.println(list.get(i));
+        }
+        return list;
+    }
+    
+ public void preorderTraversalRecursiceHelper(List<Integer> list, TreeNode root) {
+    	if(root == null) return;
+    	list.add(root.val);
+    	if(root.left != null) preorderTraversalRecursiceHelper(list,root.left);
+    	if(root.right != null) preorderTraversalRecursiceHelper(list,root.right);
+    	
+    }
+    
+    
+    
+    
