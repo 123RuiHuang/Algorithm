@@ -1,0 +1,36 @@
+Input: 1->2->3->4->5->NULL, m = 2, n = 4
+Output: 1->4->3->2->5->NULL
+
+Time O(n); Space O(1)
+public ListNode reverseBetween(ListNode head, int m, int n) {
+          if(head == null || m== n) return head;
+        else {
+            ListNode dummy = new ListNode(0);
+            dummy.next = head;
+            ListNode pointer1 = null, pointer2 = null, pointer3 = null, pointer4 = null,curNode = null,preNode = null,nextNode;
+            for(int i = -1; i <= n -1; i++) {
+            	if(i == -1) curNode = dummy;
+            	else {
+            		curNode = curNode.next;
+            	}
+            	if(i == m -2) pointer1 = curNode;
+            	if(i == m -1) pointer2 = curNode;
+            	if(i == n -1) pointer3 = curNode;
+            }
+            pointer4 = pointer3.next;
+            curNode =pointer2.next;
+            preNode = pointer2;
+            while(curNode != pointer4) {
+            	nextNode = curNode.next;
+            	curNode.next = preNode;
+            	preNode = curNode;
+            	curNode = nextNode;	 
+            }
+            
+            pointer1.next = pointer3;
+            pointer2.next = pointer4;
+            return dummy.next;
+            
+        }
+                 
+}
