@@ -1,0 +1,53 @@
+Given a n-ary tree, find its maximum depth.
+
+The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+For example, given a 3-ary tree:
+
+public int maxDepth(Node root) {
+        if(root == null) return 0;
+        Deque<Node> queue = new ArrayDeque<Node>();
+        queue.add(root);
+        int level = 1;
+        int numOfNodeInThisLevel = 1;
+        int numOfNodeInNextLevel = 0;
+        while(!queue.isEmpty()) {
+            Node curNode = queue.pop();
+            numOfNodeInThisLevel--;
+            for(int i = 0; i < curNode.children.size(); i++) {
+                queue.add(curNode.children.get(i));
+                numOfNodeInNextLevel++;
+            }
+            
+            if(numOfNodeInThisLevel == 0 && numOfNodeInNextLevel != 0) {
+                level++;
+                numOfNodeInThisLevel = numOfNodeInNextLevel;
+                numOfNodeInNextLevel = 0;
+            }
+            
+        }
+        return level;
+  }
+  
+  
+  public int maxDepth(Node root) {
+        int res = 0;
+        if(root == null) return res;
+        Deque<Node> queue = new ArrayDeque<Node>();
+        Node curNode;
+        queue.add(root);
+        int size = 0;
+        int level = 0;
+        while(!queue.isEmpty()) {
+            size = queue.size();
+            for(int i = 0; i < size; i++) {
+                curNode = queue.pop();
+                for(Node node: curNode.children) {
+                    queue.add(node);
+                }
+            }
+            level++;
+        }
+        return level;
+    }
+        
