@@ -47,5 +47,5 @@ https://leetcode.com/problems/leaf-similar-trees/
                 curNode = curNode.right;
             }
         }
-        return list;
+        return list; 
     }
