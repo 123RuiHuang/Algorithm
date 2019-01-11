@@ -21,3 +21,27 @@ public ListNode detectCycle(ListNode head) {
         }
         return null;
 }
+
+// Time O(n); Space O(1)
+public ListNode detectCycle(ListNode head) {
+        if(head == null) return null;
+        else {
+            ListNode slow = head;
+            ListNode fast = head;
+            while(fast.next != null && fast.next.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
+                if(fast == slow) {
+                    slow = head;
+                    while(fast != slow) {
+                        fast = fast.next;
+                        slow = slow.next;
+                    }
+                    return slow;
+                }
+            }
+            return null;
+        }
+    }
+    
+    第一次相遇后，slow 回到原点。然后fast slow每次都移动一个点，最终会在圆圈的入口点处相遇
