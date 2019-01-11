@@ -1,0 +1,17 @@
+
+public List<Integer> preorder(Node root) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if(root == null) return list;
+        Node curNode;
+        Deque<Node> stack = new ArrayDeque<Node>();
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            curNode = stack.pop();
+            list.add(curNode.val);
+            int size = curNode.children.size() -1;
+            for(int i = size; i >= 0; i--) {
+                stack.push(curNode.children.get(i));
+            }
+        }
+        return list;
+    }
