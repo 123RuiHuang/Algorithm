@@ -36,7 +36,8 @@ https://leetcode.com/problems/leaf-similar-trees/
         
         while(!stack.isEmpty() || curNode != null) {
             if(curNode != null) {
-                if((curNode.left == null) && (curNode.right == null))                                    list.add(curNode.val);
+                if((curNode.left == null) && (curNode.right == null))                                    
+                list.add(curNode.val);
                 stack.push(curNode);
                 curNode = curNode.left;
             }
