@@ -1,0 +1,101 @@
+// method1 implement priority queue by myself
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+	 max_heap maxheap = new max_heap(nums);
+     maxheap.build_max_heap(nums);
+     for(int i = 1; i < k; i++) {
+	      maxheap.pop(nums);
+	 }
+	 return maxheap.peer(nums);
+ }
+    class max_heap{
+     int[] nums;
+     int heapSize;
+  public max_heap(int[] array) {
+     nums = array;
+	 heapSize = array.length;
+  }
+  public void build_max_heap(int[] nums) {
+         for(int i = nums.length / 2 - 1; i >=0; i--) {
+		      max_heapify(nums,i);
+		 }
+ 
+ }
+ 
+ public void max_heapify(int[] nums, int i) {
+         int l = 2*i + 1;
+		 int r = 2*i + 2;
+		 int largest = i;
+		 if(l < heapSize && nums[l] > nums[i]) {
+		         largest = l;
+		 }
+		 if(r < heapSize && nums[r] > nums[largest]) {
+		         largest = r;
+		 }
+		 if(largest != i) {
+		     int temp = nums[largest];
+			 nums[largest] = nums[i];
+			 nums[i] = temp;
+			 max_heapify(nums,largest);
+		 }
+		 
+ }
+ 
+ public void heapSort(int[] nums) {
+     build_max_heap(nums);
+	 for(int i = nums.length -1; i >= 1; i--) {
+	     int temp = nums[0];
+		 nums[0] = nums[i];
+		 nums[i] = temp;
+		 heapSize--;
+		 max_heapify(nums,0);
+	 }
+	 heapSize = nums.length;
+ 
+ }
+ 
+ 
+ 
+ public int pop(int[] nums) {
+   int top = nums[0];
+   nums[0] = nums[heapSize -1];
+   heapSize--;
+   max_heapify(nums,0);
+   return top;
+ }
+ 
+ public int peer(int[] nums) {
+	return nums[0];
+ 
+ }
+ 
+ }
+ 
+}
+
+
+// method 2 use priority provided by java
+
+public class Solution {
+   public int findKthLargest(int[] nums, int k) {
+       PriorityQueue<Integer> minheap = new PriorityQueue<Integer>(
+          new Comparator<Integer>(){ //此处没必要要，默认就是从小排到大
+		 public int compare(Integer a, Integer b) {
+			 if(b < a) return 1;
+			 else return -1;
+		 }
+	 }
+       );
+	 for(int i = 0; i < k; i++) {
+		 minheap.offer(nums[i]);
+	 }
+	 for(int i = k; i < nums.length; i++) {
+		 if(nums[i] > minheap.peek()) {
+			 minheap.poll();
+			 minheap.offer(nums[i]);
+		 }
+	 }
+	 
+	 return minheap.peek();
+    }
+}
