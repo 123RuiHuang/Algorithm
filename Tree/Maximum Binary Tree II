@@ -1,0 +1,49 @@
+// average Time: O(nlgn) Space O(n)    worst case: time:O(n^2),Space O(n)
+public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+        ArrayList<Integer> list = inOrderTraversal(root);
+        list.add(val);
+        return constructMaxTree(list);
+    }
+    
+    public ArrayList<Integer> inOrderTraversal(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+        TreeNode curNode = root;
+        while(curNode != null || !stack.isEmpty()) {
+            if(curNode != null) {
+                stack.push(curNode);
+                curNode = curNode.left;
+            }
+            else {
+                curNode = stack.pop();
+                list.add(curNode.val);
+                curNode = curNode.right;
+            }
+        }
+        return list;  
+    }
+    
+    public TreeNode constructMaxTree(ArrayList list) {
+       return helper(list,0,list.size() -1);
+    }
+    
+    public TreeNode helper(ArrayList<Integer> list, int start, int end) {
+        if(start > end) return null;
+        int index = getMax(list,start,end);
+        TreeNode root = new TreeNode(list.get(index));
+        root.left = helper(list,start,index -1);
+        root.right = helper(list,index + 1, end);
+        return root;
+    }
+    
+    public int getMax(ArrayList<Integer> list, int start, int end) {
+        int max = Integer.MIN_VALUE;
+        int index = -1;
+        for(int i = start; i <= end; i++) {
+            if(list.get(i) > max) {
+                index = i;
+                max = list.get(i);
+            }
+        }
+        return index;
+    }
