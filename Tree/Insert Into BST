@@ -1,0 +1,23 @@
+Given the root node of a binary search tree (BST) and a value to be inserted into the tree, insert the value into the BST. Return the root node of the BST after the insertion. It is guaranteed that the new value does not exist in the original BST.
+
+Note that there may exist multiple valid ways for the insertion, as long as the tree remains a BST after insertion. You can return any of them.
+
+// Time: O(lgn) Space O(1)
+public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root == null) return null;
+        TreeNode curNode = root;
+        TreeNode parentNode = root;
+        while(curNode != null) {
+          parentNode = curNode;
+          if(curNode.val > val) {
+            curNode = curNode.left;
+          }
+          else{
+            curNode = curNode.right;
+          }
+        }
+        if(val > parentNode.val) parentNode.right = new TreeNode(val);
+        else parentNode.left = new TreeNode(val);
+       
+        return root;
+    }
