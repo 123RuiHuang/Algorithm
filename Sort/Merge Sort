@@ -1,3 +1,5 @@
+// Time: O(nlgn) Space O(n)
+
 mergeSort(nums,0,nums.length -1);
 
  public void mergeSort(int[] nums, int l, int r) {
