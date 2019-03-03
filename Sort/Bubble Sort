@@ -1,0 +1,36 @@
+// Bubble Sort Time: O(n^2) Space:O（1）iterateive
+public void sortColors(int[] nums) {
+        int length = nums.length;
+        int temp;
+        boolean flag;
+        for(int i = 0; i < length -1; i++) {
+            flag = false;
+            for(int j = 0; j < length - i - 1; j++) {
+                if(nums[j] > nums[j + 1]) {
+                    flag = true;
+                    temp = nums[j];
+                    nums[j] = nums[j+1];
+                    nums[j+1] = temp;
+                }
+            }
+            if(flag == false) break;
+        }
+      
+    }
+// Bubble Sort Time: O(n^2) Space:O（n）recursive
+public void sortColors(int[] nums) {
+        helper(nums,nums.length);
+    }
+    
+    public void helper(int[] nums, int n) {
+        if(n == 1) return;
+        int temp;
+        for(int i = 0; i < n - 1; i++) {
+            if(nums[i] > nums[i+1]) {
+                temp = nums[i+1];
+                nums[i+1] = nums[i];
+                nums[i] = temp;
+            }
+        }
+        helper(nums,n-1);
+}
