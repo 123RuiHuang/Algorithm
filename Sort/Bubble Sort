@@ -1,5 +1,5 @@
 // Bubble Sort Time: O(n^2) Space:O（1）iterateive
-public void sortColors(int[] nums) {
+public void bubbleSort(int[] nums) {
         int length = nums.length;
         int temp;
         boolean flag;
@@ -18,7 +18,7 @@ public void sortColors(int[] nums) {
       
     }
 // Bubble Sort Time: O(n^2) Space:O（n）recursive
-public void sortColors(int[] nums) {
+public void bubbleSort(int[] nums) {
         helper(nums,nums.length);
     }
     
