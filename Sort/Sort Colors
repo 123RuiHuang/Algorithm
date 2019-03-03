@@ -39,3 +39,50 @@ public void sortColors(int[] nums) {
         }
         helper(nums,n-1);
     }
+
+// Merge Sort
+public void sortColors(int[] nums) {
+       mergeSort(nums,0,nums.length -1);
+    }
+    
+    public void mergeSort(int[] nums, int l, int r) {
+        if(l < r) {
+            int m = (l + r) / 2;
+            mergeSort(nums,l,m);
+            mergeSort(nums,m+1,r);
+            merge(nums,l,m,r);
+        }
+    }
+    
+    public void merge(int[] nums, int l, int m, int r) {
+        int L[] = new int[m - l + 1];
+        int R[] = new int[r - m];
+        for(int i = 0; i < m-l+1; i++) L[i] = nums[i + l];
+        for(int i = 0; i < r-m; i++) R[i] = nums[i + m + 1];
+        int i = 0, j = 0, k = l;
+        while(i < L.length && j < R.length) {
+            if(L[i] <= R[j]) {
+                nums[k] = L[i];
+                i++;
+            }
+            else {
+                nums[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+        
+        while(i < L.length) {
+            nums[k] = L[i];
+            i++;
+            k++;
+        }
+         while(j < R.length) {
+            nums[k] = R[j];
+            j++;
+            k++;
+        }
+        for(int d = l; d <= r; d++ ) System.out.print(nums[d]);
+        System.out.println("");
+
+    }
