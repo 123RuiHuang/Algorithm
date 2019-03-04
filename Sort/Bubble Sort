@@ -22,7 +22,7 @@ public void bubbleSort(int[] nums) {
         helper(nums,nums.length);
     }
     
-    public void helper(int[] nums, int n) { // 
+    public void helper(int[] nums, int n) { // n is size of nums, not index
         if(n == 1) return;
         int temp;
         for(int i = 0; i < n - 1; i++) {
