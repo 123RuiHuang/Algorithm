@@ -1,4 +1,5 @@
 //Time: O(n*2) Space O(1)
+斗地主理牌：对于每一张牌，向左遍历，找到合适位置插入
 public void insertSort(int[] nums) {
         int j;
         int temp;
