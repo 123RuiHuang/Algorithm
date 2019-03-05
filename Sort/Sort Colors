@@ -86,3 +86,22 @@ public void sortColors(int[] nums) {
         System.out.println("");
 
     }
+    
+    // insert sort
+      public void sortColors(int[] nums) {
+      insertSort(nums);
+    }
+    
+    public void insertSort(int[] nums) {
+        int j;
+        int temp;
+        for(int i = 1; i < nums.length; i++) {
+            j = i - 1;
+            temp = nums[i];
+            while(j >= 0 && nums[j] > temp) {
+                nums[j+1] = nums[j];
+                j--;
+            }
+            nums[j+1] = temp;
+        }
+    }
