@@ -1,0 +1,39 @@
+//O(n3)
+public List<List<Integer>> fourSum(int[] nums, int target) {
+        ArrayList<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(nums.length < 4) return result;
+        Arrays.sort(nums);
+        int size = nums.length, left,right,sum;
+        ArrayList<Integer> temp = null;
+        for(int i = 0; i < size - 3; i++) {
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+            for(int j = i+1; j < size - 2; j++) {
+                if(j > i + 1 && nums[j] == nums[j - 1]) continue;
+                left = j + 1;
+                right =  size - 1;
+                while(left < right) {
+                    sum = nums[i] + nums[j] + nums[left] + nums[right];
+                    if(sum == target) {
+                        temp = new ArrayList<Integer>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[left]);
+                        temp.add(nums[right]);
+                        result.add(temp);
+                        while(left + 1 < size && nums[left] == nums[left + 1]) left++;
+                        while(right - 1 >= 0 && nums[right] == nums[right - 1]) right--;
+                        left++;
+                        right--;
+                    }
+                    else if(sum < target) {
+                        left++;
+                    }
+                    else {
+                        right--;
+                    }
+                }  
+            }
+        }
+        return result;
+    }
+}
