@@ -1,0 +1,33 @@
+// brute force Time O(n2) Space O(1)
+public static int subarraySum(int[] nums, int k) {
+    int count = 0;
+    int sum;
+    for (int i = 0; i < nums.length; i++) {
+        sum = 0;
+        for (int j = i; j < nums.length; j++) {
+            sum += nums[j];
+            if (sum == k) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+// optimitize Time O(n) Space O(n)
+Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+public int subarraySum(int[] nums, int k) {
+        if(nums.length == 1) return nums[0] == k ? 1 : 0;
+        int count = 0, size = nums.length;
+        HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
+        for(int i = 1; i < size; i++) {
+            nums[i] += nums[i-1];
+        }
+        for(int i = 0; i < size; i++) {
+            if(nums[i] == k) count++;
+            if(map.containsKey(nums[i] - k)) count+= map.get(nums[i] - k);
+             map.put(nums[i],map.getOrDefault(nums[i],0) + 1);
+            
+        }
+        return count;
+    }
