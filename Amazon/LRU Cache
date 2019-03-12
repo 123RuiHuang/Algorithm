@@ -64,7 +64,7 @@ public class LRUCache {
 	  else {
 		  node = map.get(key);
 		  removeNode(node);
-          node.val = val;
+          node.val = val; 
 	  }
 	  setHead(node);
   }
