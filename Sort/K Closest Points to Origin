@@ -91,3 +91,79 @@ Output: [[3,3],[-2,4]]
         return Math.pow(point[0],2) + Math.pow(point[1],2);
     }
  
+ // quicksort after optimized time o(nlgn) space o(1)
+ public int[][] kClosest(int[][] points, int K) {
+        double[] dist = computeDist(points);
+        quickSort(points, 0, points.length -1,dist);
+        int[][] result = new int[K][2];
+        for(int i = 0; i < K; i++) {
+            result[i][0] = points[i][0];
+            result[i][1] = points[i][1];
+        }
+        return result;
+    }
+    
+    public double[] computeDist(int[][] points) {
+        double[] dist = new double[points.length];
+        for(int i= 0; i < points.length; i++) {
+            dist[i] = Math.pow(points[i][0],2) + Math.pow(points[i][1],2);
+        }
+        return dist;
+    }
+    
+    
+    public void quickSort(int[][] points, int start, int end, double[] dist) {
+        if(start < end) {
+            int mid = partition(points,start,end, dist);
+            quickSort(points, start, mid -1, dist);
+            quickSort(points, mid+1, end, dist);
+        }
+    }
+    
+    public int partition(int[][] points, int start, int end, double[] dist) {
+        int i = start - 1;
+        //int[] media = points[end];
+        int[] swapPoint;
+        double swapDist;
+        for(int j = start; j < end; j++) {
+            if(dist[j]< dist[end]) { // can be optimized
+                i++;
+                swapPoint = points[i];
+                points[i] = points[j];
+                points[j] = swapPoint;
+                swapDist = dist[i];
+                dist[i] = dist[j];
+                dist[j] = swapDist;
+                
+            }
+        }
+        i++;
+        swapPoint = points[i];
+        points[i] = points[end];
+        points[end] = swapPoint;
+        swapDist = dist[i];
+        dist[end] = dist[end];
+        dist[end] = swapDist;
+        
+        return i;
+    }
+    
+    public double getDistance(int[] point) {
+        return Math.pow(point[0],2) + Math.pow(point[1],2);
+    }
+    
+    public void insertSort(int[][] points) {
+        int j;
+        double dist1,dist2;
+        int[] temp;
+        for(int i = 1; i < points.length; i++) {
+            j = i - 1;
+            temp = points[i];
+            dist2 = Math.pow(temp[0],2) + Math.pow(temp[1],2);
+            while(j >= 0 && (Math.pow(points[j][0],2) + Math.pow(points[j][1],2)) > dist2) {
+                points[j+1] = points[j];
+                j--;
+            }
+            points[j+1] = temp;
+        }
+    }
