@@ -21,3 +21,30 @@
         }
         return result; 
     }
+// 1 Substrings of length K with K distinct characters output distinct result
+public String[] test(String s, int k) {
+    if(s == null || s.length() < k) return null;
+    ArrayList<String> result = new ArrayList<String>();
+    HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+    int p1 = 0, size = s.length();
+    char tmp;
+    for(int i = 0; i < k; i++) {
+      map.put(s.charAt(i),map.getOrDefault(s.charAt(i), 0) + 1);
+    }
+    if(map.size() == k) result.add(s.substring(0,k));
+    for(int i = k; i < size; i++) {
+      tmp = s.charAt(p1);
+      if(map.get(tmp) == 1) {
+          map.remove(tmp);
+      }
+      else {
+        map.put(tmp,map.get(tmp) - 1);
+      }
+      p1++;
+      map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0) + 1);
+      if(map.size() == k) {
+        result.add(s.substring(p1,i+1));
+      }
+    }
+    return result.toArray(new String[1]);
+  }
