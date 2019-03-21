@@ -1,0 +1,32 @@
+// Time O(size * maxlength*lg(maxlength)). size is length of strs, maxlength is the max length of strs[i] for i belong to (0,size)
+Given an array of strings, group anagrams together.
+
+Example:
+
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+Output:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+
+public List<List<String>> groupAnagrams(String[] strs) {
+        int size = strs.length;
+        ArrayList<List<String>> result = new ArrayList<List<String>>();
+        HashMap<String,List<String>> map = new HashMap<String,List<String>>();
+        if(size == 0) return result;
+        for(int i = 0; i < size; i++) {
+            char[] chars = strs[i].toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            if(!map.containsKey(key)) {
+                map.put(key,new ArrayList<String>());
+            }
+            map.get(key).add(strs[i]);
+        }
+        for(String key: map.keySet()) {
+            result.add(map.get(key));
+        }
+        return result;
+    }
