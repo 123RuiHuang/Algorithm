@@ -1,0 +1,22 @@
+ T O(n); S O(1)
+Given an array nums of n integers where n > 1,  return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+
+Example:
+
+Input:  [1,2,3,4]
+Output: [24,12,8,6]
+
+ public int[] productExceptSelf(int[] nums) {
+        int size = nums.length,tmp = 1;
+        int[] result = new int[size];
+        for(int i = 0; i < size; i++) {
+            if(i == 0) result[i] = 1;
+            else result[i] = result[i -1] * nums[i -1];
+        }
+        
+        for(int i = size -1; i >= 0; i--) {
+            result[i] = result[i] * tmp;
+            tmp = tmp * nums[i];
+        }
+        return result;
+    }
