@@ -21,3 +21,39 @@
          head.next = null;
          return p;
 }
+
+
+class Solution {
+   public ListNode reverseList(ListNode head) {
+       int length = getLength(head);
+       return helper(head,length);
+   }
+    
+   public int getLength(ListNode head) {
+       int length = 0;
+       while(head != null) {
+           length++;
+           head = head.next;
+       }
+       return length;
+   }
+    
+   public ListNode helper(ListNode head, int K) {
+       ListNode curNode = head, prevNode = null, nextNode = null;
+       int count = 0;
+       while(count < K && curNode != null) {
+           nextNode = curNode.next;
+           curNode.next = prevNode;
+           prevNode = curNode;
+           curNode = nextNode;
+       }
+       
+       if(curNode != null) {
+           head.next = helper(curNode,K);
+       }
+       return prevNode;
+   }
+    
+    
+    
+}
