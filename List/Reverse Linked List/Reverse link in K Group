@@ -1,0 +1,27 @@
+Given a linked list, swap every two adjacent nodes and return its head.
+
+You may not modify the values in the list's nodes, only nodes itself may be changed.
+https://www.geeksforgeeks.org/reverse-a-list-in-groups-of-given-size/
+
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+       return helper(head,2);
+    }
+    
+    public ListNode helper(ListNode head, int K) {
+        ListNode curNode = head;
+        ListNode nextNode = null, preNode = null;
+        int count = 0;
+        while(count < K && curNode != null) {
+            nextNode = curNode.next;
+            curNode.next = preNode;
+            preNode = curNode;
+            curNode = nextNode;
+            count++;
+        }
+        if(curNode != null) {
+            head.next = helper(curNode,K);
+        }
+        return preNode;
+    }
+}
