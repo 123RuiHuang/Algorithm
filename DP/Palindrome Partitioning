@@ -1,0 +1,42 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+     if(s == null) return new ArrayList<List<String>>();
+     int length = s.length();
+     List<List<List<String>>> results = new ArrayList<List<List<String>>>();
+     boolean[][] table = new boolean[length][length];
+     for(int l = 0; l < length; l++) { // may need to change
+         for(int i = 0; i < length - l; i++) {
+             int j = i + l;
+             if(i == j) table[i][j] = true;
+             else if((j == i + 1) && (s.charAt(i) == s.charAt(j))) table[i][j] = true;
+             else if((j - i >= 2) && (s.charAt(i) == s.charAt(j)) && (table[i + 1][j - 1] == true)) {
+                 table[i][j] = true;
+             }
+        }
+    }
+    // build results
+    for(int right = 0; right < length; right++) {
+        List<List<String>> tmp = new ArrayList<List<String>>();
+        if(right == 0) {
+            tmp.add(new ArrayList<String>(Arrays.asList(s.substring(0,1))));// first char
+        } else {
+            for(int left = 0; left <= right; left++) {
+                if(table[left][right] == true)  { // index may need to change
+                    if(left == 0) {
+                        tmp.add(new ArrayList<String>(Arrays.asList(s.substring(left, right + 1))));
+                    }
+                    else {
+                       for(int m = 0; m < results.get(left - 1).size(); m++) {
+                           List<String> a = new ArrayList<String>(results.get(left - 1).get(m));
+                           a.add(s.substring(left, right + 1));
+                           tmp.add(a);
+                       } 
+                    }
+                }
+            }
+        }
+        results.add(tmp);
+     } 
+    return results.get(length -1);
+  }
+}
