@@ -14,4 +14,4 @@
     }
     
     the longest path from a node to leaf is height - 1;
-    so at line 12, it is leftHeight - 1 + rightHeight -1 + 2
+    so at line 12, it is leftHeight - 1 + rightHeight -1 + 2 
