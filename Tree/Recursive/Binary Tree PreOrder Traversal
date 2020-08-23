@@ -1,0 +1,13 @@
+//Recursive Time O(n); Space O(n)
+ public List<Integer> preorderTraversalRecursice(TreeNode root) {
+    	List<Integer> list = new ArrayList<Integer>();
+    	preorderTraversalRecursiceHelper(list,root);
+      return list;
+}
+    
+ public void preorderTraversalRecursiceHelper(List<Integer> list, TreeNode root) {
+    	if(root == null) return;
+    	list.add(root.val);
+    	if(root.left != null) preorderTraversalRecursiceHelper(list,root.left);
+    	if(root.right != null) preorderTraversalRecursiceHelper(list,root.right);	
+}
