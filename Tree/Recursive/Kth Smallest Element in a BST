@@ -1,0 +1,14 @@
+Time O(n) Space O(n)
+public int kthSmallest(TreeNode root, int k) {
+       List<Integer> result = new ArrayList<Integer>();
+       kthSmallestHelper(root, k, result);
+       return result.get(k - 1);
+}
+    
+public void kthSmallestHelper(TreeNode root, int k, List<Integer> result) {
+    if (result.size() == k) return;
+    if (root == null) return;
+    if (root.left != null) kthSmallestHelper(root.left, k, result);
+    result.add(root.val);
+    if (root.right != null) kthSmallestHelper(root.right, k, result);
+}
