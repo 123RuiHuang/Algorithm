@@ -1,4 +1,4 @@
-Time O(n) Space O(n)
+Time O(n) Space O(n) This is inorder traversal
 public int kthSmallest(TreeNode root, int k) {
        List<Integer> result = new ArrayList<Integer>();
        kthSmallestHelper(root, k, result);
