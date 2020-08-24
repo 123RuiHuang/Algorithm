@@ -7,6 +7,6 @@ class Solution {
          if (root.left != null) postorderTraversal(root.left);
          if (root.right != null) postorderTraversal(root.right);
          result.add(root.val);
-         return result;
+         return result; 
     }    
 }
