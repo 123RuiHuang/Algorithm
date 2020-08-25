@@ -1,0 +1,15 @@
+Time O(n) Space O(h)
+https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+
+public TreeNode sortedArrayToBST(int[] nums) {
+	    return helper(nums, 0, nums.length);
+}
+    
+   public TreeNode helper(int[] nums, int start, int end) {
+        if (start >= end) return null;
+        int mid = (start + end) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper(nums, start, mid);
+        root.right = helper(nums, mid + 1, end);
+        return root; 
+}
