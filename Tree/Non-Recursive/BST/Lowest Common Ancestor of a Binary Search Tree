@@ -1,0 +1,16 @@
+Time O(h) Space O (1)
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        int min = Math.min(p.val, q.val);
+        int max = Math.max(p.val, q.val);
+        TreeNode curNode = root;
+        while (curNode.val >= max || curNode.val <= min) {
+            if (curNode.val > max) {
+                curNode = curNode.left;
+            } else if (curNode.val < min) {
+                curNode = curNode.right;
+            } else {
+                break;
+            }
+        }
+        return curNode;
+}
