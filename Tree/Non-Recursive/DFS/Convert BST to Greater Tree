@@ -1,0 +1,26 @@
+Time O(n) SpaceO(h) in-order traversal
+
+public TreeNode convertBST(TreeNode root) {
+        List<TreeNode> list = convertBSTHelper(root);
+        for (int i = list.size() - 2; i >= 0; i--) {
+            list.get(i).val += list.get(i + 1).val;
+        }
+        return root;
+}
+    
+    public List<TreeNode> convertBSTHelper(TreeNode root) {
+       List<TreeNode> list = new ArrayList<TreeNode>();
+       LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+       TreeNode curNode = root;
+        while (!stack.isEmpty() || curNode != null) {
+            if (curNode != null) {
+                stack.push(curNode);
+                curNode = curNode.left;
+            } else {
+                curNode = stack.pop();
+                list.add(curNode);
+                curNode = curNode.right;
+            }
+        }
+        return list;
+}
