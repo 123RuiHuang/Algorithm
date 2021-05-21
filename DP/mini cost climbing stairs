@@ -1,0 +1,3 @@
+https://leetcode.com/problems/min-cost-climbing-stairs/submissions/
+
+The "top of the floor" does not refer to the final index of costs. We actually need to "arrive" beyond the array's bounds.
