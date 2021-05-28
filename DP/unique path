@@ -1,1 +1,22 @@
 https://leetcode.com/problems/unique-paths/
+
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+How many possible unique paths are there?
+
+ public int minPathSum(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[][] cost = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0) {
+                    if (j == 0) cost[i][j] = grid[0][0];
+                    else cost[i][j] = cost[i][j - 1] + grid[i][j];
+                } else {
+                    if (j == 0) cost[i][j] = cost[i - 1][j] + grid[i][j];
+                    else cost[i][j] = Math.min(cost[i - 1][j], cost[i][j - 1]) + grid[i][j];
+                }
+            }
+        }
+        return cost[m - 1][n - 1];
+}
