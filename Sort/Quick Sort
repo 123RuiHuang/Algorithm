@@ -10,6 +10,9 @@
 		int i = begin - 1;
 		// System.out.println(end);
 		int media = nums[end];
+		
+		// [i + 1, j]之间保存的是大于 media的数
+		
 		for (int j = begin; j < end; j++) {
 			if (nums[j] < media) {
 				i++;
