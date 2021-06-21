@@ -45,3 +45,6 @@ public ListNode detectCycle(ListNode head) {
     }
     
     第一次相遇后，slow 回到原点。然后fast slow每次都移动一个点，最终会在圆圈的入口点处相遇
+        证明：（x + y）/ v = ((x + y) + n (y + z)) / 2v => x = (n - 1)(y + z) + z
+        x is the distance between head and cycle start node, y is distance between cycle start node and node they meet, z is distance between node they meet and the cycle 
+        start point
