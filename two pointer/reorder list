@@ -1,0 +1,47 @@
+https://leetcode.com/problems/reorder-list/
+考察了： 链表快慢指针，链表反转，链表合并等知识点
+
+class Solution {
+    public void reorderList(ListNode head) {
+        if (head.next == null) return;
+        ListNode middle = getMiddle(head);
+        ListNode secondHead = reverse(middle);
+        merge(head, secondHead);
+    }
+    
+    private ListNode getMiddle(ListNode head) {
+        ListNode slowPrev = null, slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slowPrev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slowPrev.next = null;
+        return slow;
+    }
+    
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null, node = head;
+        while (node != null) {
+            ListNode next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return prev;
+    }
+    
+    private void merge(ListNode head1, ListNode head2) {
+        ListNode node1 = head1, node2 = head2;
+        while (node1 != null && node2 != null) {
+            ListNode next1 = node1.next;
+            ListNode next2 = node2.next;
+            
+            node1.next = node2;
+            if (next1 != null) node2.next = next1;
+            
+            node1 = next1;
+            node2 = next2;
+        }
+    }
+}
