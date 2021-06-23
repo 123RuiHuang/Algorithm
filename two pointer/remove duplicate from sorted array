@@ -1,0 +1,14 @@
+ https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+ 
+ 下标在 [i+1， j]之间的元素和下标为i的元素值相同
+ public int removeDuplicates(int[] nums) {
+        int length = nums.length;
+        if (length == 0) return 0;
+        int i = 0;
+        for (int j = 1; j < length; j++) {
+            if (nums[j] != nums[i]) {
+                nums[++i] = nums[j];
+            }
+        }
+        return i + 1;
+    }
