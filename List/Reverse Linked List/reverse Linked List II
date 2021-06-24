@@ -1,6 +1,46 @@
 Input: 1->2->3->4->5->NULL, m = 2, n = 4
 Output: 1->4->3->2->5->NULL
 
+ public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (head.next == null) return head;
+        if (m == n) return head;
+        ListNode sentinel = new ListNode(0), front = null, end = null, frontPrev = null, endNext = null, node = sentinel;
+        sentinel.next = head;
+        int count = 0;
+        while (node != null) {
+            if (count == m -1) frontPrev = node;
+            else if (count == m) front = node;
+            else if (count == n) end = node;
+            else if (count == n + 1) {
+                endNext = node;
+                break;
+            }
+            node = node.next;
+            count++;
+        }
+
+        // break the list
+        frontPrev.next = null;
+        end.next = null;
+        
+        reverse(front);
+        
+        frontPrev.next = end;
+        front.next = endNext;
+        
+        return sentinel.next;
+    }
+    
+    private void reverse(ListNode head) {
+        ListNode prev = null, node = head;
+        while (node != null) {
+            ListNode next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+    }
+    
 Time O(n); Space O(1)
 public ListNode reverseBetween(ListNode head, int m, int n) {
           if(head == null || m== n) return head;
